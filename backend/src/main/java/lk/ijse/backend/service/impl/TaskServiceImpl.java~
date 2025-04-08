@@ -23,7 +23,7 @@ public class TaskServiceImpl implements TaskService {
     public void saveTask(TaskDTO taskDTO) {
         Task savedTask = taskDao.save(mapping.toTaskEntity(taskDTO));
         if(savedTask == null){
-            throw new RuntimeException("Failed to save task");
+            throw new DataPersistException("Task not saved");
         }
     }
 
