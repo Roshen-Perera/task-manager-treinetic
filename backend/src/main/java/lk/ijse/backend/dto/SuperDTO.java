@@ -1,4 +1,6 @@
 package lk.ijse.backend.dto;
 
-public class SuperDTO {
+import java.io.Serializable;
+
+public interface SuperDTO extends Serializable {
 }
