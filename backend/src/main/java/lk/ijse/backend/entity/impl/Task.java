@@ -1,4 +1,6 @@
 package lk.ijse.backend.entity.impl;
 
-public class Task {
+import lk.ijse.backend.entity.SuperEntity;
+
+public class Task implements SuperEntity {
 }
