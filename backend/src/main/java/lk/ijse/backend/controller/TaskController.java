@@ -2,6 +2,7 @@ package lk.ijse.backend.controller;
 
 
 import lk.ijse.backend.DataPersistException;
+import lk.ijse.backend.dto.TaskStatus;
 import lk.ijse.backend.dto.impl.TaskDTO;
 import lk.ijse.backend.service.TaskService;
 import org.slf4j.Logger;
@@ -43,5 +44,11 @@ public class TaskController {
     public List<TaskDTO> getAllTasks() {
         logger.info("Getting all tasks");
         return taskService.getAllTasks();
+    }
+
+    @GetMapping(value = "/{taskID}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public TaskStatus getSelectedTask(@PathVariable ("taskID") String taskId){
+        logger.info("Task fetched");
+        return taskService.getTask(taskId);
     }
 }
