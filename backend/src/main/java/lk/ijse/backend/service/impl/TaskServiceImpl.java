@@ -30,7 +30,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDTO> getAllTasks() {
-        return List.of();
+        return mapping.asTaskDTOList(taskDao.findAll());
     }
 
     @Override
