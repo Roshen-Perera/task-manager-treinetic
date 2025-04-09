@@ -6,9 +6,9 @@ import lk.ijse.backend.dto.impl.TaskDTO;
 import java.util.List;
 
 public interface TaskService {
-    void saveTask(TaskDTO noteDTO);
+    void saveTask(TaskDTO taskDTO);
     List<TaskDTO> getAllTasks();
-    TaskStatus getTask(String noteId);
-    void deleteTask(String noteId);
-    void updateTask(String noteId, TaskDTO noteDTO);
+    TaskStatus getTask(String taskId);
+    void deleteTask(String taskId);
+    void updateTask(String taskId, TaskDTO taskDTO);
 }

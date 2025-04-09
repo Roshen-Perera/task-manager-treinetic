@@ -1,6 +1,7 @@
 package lk.ijse.backend.service.impl;
 
 import jakarta.transaction.Transactional;
+import lk.ijse.backend.DataPersistException;
 import lk.ijse.backend.dao.TaskDAO;
 import lk.ijse.backend.dto.TaskStatus;
 import lk.ijse.backend.dto.impl.TaskDTO;
@@ -23,7 +24,7 @@ public class TaskServiceImpl implements TaskService {
     public void saveTask(TaskDTO taskDTO) {
         Task savedTask = taskDao.save(mapping.toTaskEntity(taskDTO));
         if(savedTask == null){
-            throw new RuntimeException("Failed to save task");
+            throw new DataPersistException("Failed to save task");
         }
     }
 

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "Task")
 public class Task implements SuperEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
     private String description;
