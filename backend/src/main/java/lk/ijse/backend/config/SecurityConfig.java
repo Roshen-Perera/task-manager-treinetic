@@ -23,7 +23,20 @@ import java.util.List;
 public class SecurityConfig {
     private final UserService userService;
     private final JWTConfigFilter jwtConfigFilter;
-
+    @Bean
+    public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception{
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(req ->
+                        req.requestMatchers("api/v1/auth/**")
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtConfigFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
