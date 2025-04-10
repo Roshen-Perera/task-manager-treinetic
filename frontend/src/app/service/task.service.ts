@@ -16,15 +16,16 @@ export class TaskService {
   }
 
   addTask(task: Task): Observable<Task> {
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NoZW4iLCJpYXQiOjE3NDQyOTYzOTYsImV4cCI6MTc0NDM4Mjc5Nn0.00q3wmyZiORg1y_RPC-q2hJo1ODOKANJIHtMXWF7TQI';
     const headers = new HttpHeaders({
-      'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NoZW4iLCJpYXQiOjE3NDQyOTYzOTYsImV4cCI6MTc0NDM4Mjc5Nn0.00q3wmyZiORg1y_RPC-q2hJo1ODOKANJIHtMXWF7TQI',  // Example of adding an authorization token
+      'Authorization': `Bearer ${token}`,
     });
-
     return this.http.post<Task>(this.serviceURL, task, { headers });
   }
   getTask(): Observable<Task[]> {
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NoZW4iLCJpYXQiOjE3NDQyOTYzOTYsImV4cCI6MTc0NDM4Mjc5Nn0.00q3wmyZiORg1y_RPC-q2hJo1ODOKANJIHtMXWF7TQI';
     const headers = new HttpHeaders({
-      'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NoZW4iLCJpYXQiOjE3NDQyOTYzOTYsImV4cCI6MTc0NDM4Mjc5Nn0.00q3wmyZiORg1y_RPC-q2hJo1ODOKANJIHtMXWF7TQI',  // Example of adding an authorization token
+      'Authorization': `Bearer ${token}`,
     });
     return this.http.get<Task[]>(this.serviceURL, { headers });
   }

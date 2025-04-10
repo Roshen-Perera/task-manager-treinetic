@@ -6,7 +6,6 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
   selector: 'app-root',
   imports: [DashboardComponent, RouterOutlet],
   templateUrl: './app.component.html',
-  standalone: false,
   styleUrl: './app.component.css'
 })
 export class AppComponent {

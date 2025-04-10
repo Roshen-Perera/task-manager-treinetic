@@ -2,11 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../../service/task.service';
 import {Task} from '../../model/task';
 import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
+
   imports: [
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
