@@ -35,4 +35,11 @@ export class TaskService {
     return this.http.get<Task>(this.serviceURL+'/'+task.id, { headers });
   }
 
+  updateTask(task: Task): Observable<Task> {
+    const headers = new HttpHeaders({
+      'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NoZW4iLCJpYXQiOjE3NDQyOTYzOTYsImV4cCI6MTc0NDM4Mjc5Nn0.00q3wmyZiORg1y_RPC-q2hJo1ODOKANJIHtMXWF7TQI',  // Example of adding an authorization token
+    });
+    return this.http.put<Task>(this.serviceURL+'/'+task.id, task, { headers });
+  }
+
 }
