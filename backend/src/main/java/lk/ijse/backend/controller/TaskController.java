@@ -67,4 +67,19 @@ public class TaskController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PatchMapping(value = "/{taskID}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateTask(@PathVariable ("taskID") String taskId,@RequestBody TaskDTO taskDTO){
+        try {
+            logger.info("Task updated");
+            taskService.updateTask(taskId,taskDTO);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (TaskNotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }}
 }
