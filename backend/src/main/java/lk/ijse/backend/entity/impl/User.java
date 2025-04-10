@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "User")
 public class User implements SuperEntity, UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private String username;
     private String password;

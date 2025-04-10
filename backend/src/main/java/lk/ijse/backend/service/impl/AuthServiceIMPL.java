@@ -33,9 +33,8 @@ public class AuthServiceIMPL implements AuthService {
     @Override
     public JWTAuthResponse signUp(UserDTO signUp) {
         signUp.setPassword(signUp.getPassword());
-        User user = mapping.toUserEntity(signUp);
-        if (userDao.existsById(signUp.getUsername())) throw new UsernameNotFoundException("user Alrady Exsist");
-        userDao.save(user);
+
+        User user = userDao.save(mapping.toUserEntity(signUp));
         var jwtToken = jwtService.generateToken(user);
         return JWTAuthResponse.builder()
                 .token(jwtToken)
