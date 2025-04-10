@@ -22,6 +22,12 @@ public class JWTServiceImpl implements JWTService {
 
     @Override
     public Claims extractAllClaims(String token) {
+        return Jwts
+                .parser()
+                .setSigningKey(getSigninKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     private Key getSigninKey() {
@@ -31,7 +37,8 @@ public class JWTServiceImpl implements JWTService {
 
     @Override
     public <T> T extractClaim(String token, Function<Claims, T> claimResolve) {
-        return null;
+        final Claims claims = extractAllClaims(token);
+        return claimResolve.apply(claims);
     }
 
     @Override
