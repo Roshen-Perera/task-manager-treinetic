@@ -40,7 +40,6 @@ export class DashboardComponent implements OnInit{
     this.taskObject.description = this.taskDescription;
     this.taskService.addTask(this.taskObject).subscribe(res => {
       this.ngOnInit()
-      this.taskTitle = '';
     }, err => {
       alert(err.error.message);
     });
