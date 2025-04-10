@@ -7,6 +7,7 @@ import lk.ijse.backend.dao.TaskDAO;
 import lk.ijse.backend.dto.TaskStatus;
 import lk.ijse.backend.dto.impl.TaskDTO;
 import lk.ijse.backend.entity.impl.Task;
+import lk.ijse.backend.exception.TaskNotFoundException;
 import lk.ijse.backend.service.TaskService;
 import lk.ijse.backend.util.Mapping;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -45,13 +47,19 @@ public class TaskServiceImpl implements TaskService {
             return mapping.toTaskDTO(task);
         } else {
             logger.info("Task not found");
-            return null;
+            throw new TaskNotFoundException("Task not found");
         }
     }
 
     @Override
     public void deleteTask(String taskId) {
-
+        Optional<Task> task = taskDao.findById(taskId);
+        if(task.isPresent()){
+            taskDao.deleteById(taskId);
+        } else {
+            logger.info("Task not found");
+            throw new TaskNotFoundException("Task not found");
+        }
     }
 
     @Override
