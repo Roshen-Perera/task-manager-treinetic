@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/task")
 public class TaskController {
-    static Logger logger =  LoggerFactory.getLogger(TaskController.class);
+    static Logger logger = LoggerFactory.getLogger(TaskController.class);
 
     @Autowired
     private TaskService taskService;
@@ -32,10 +32,10 @@ public class TaskController {
             logger.info("Saving task");
             taskService.saveTask(taskDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
-        }catch (DataPersistException e){
+        } catch (DataPersistException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -47,39 +47,39 @@ public class TaskController {
         return taskService.getAllTasks();
     }
 
-    @GetMapping(value = "/{taskID}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public TaskStatus getSelectedTask(@PathVariable ("taskID") String taskId){
+    @GetMapping(value = "/{taskID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TaskStatus getSelectedTask(@PathVariable("taskID") String taskId) {
         logger.info("Task fetched");
         return taskService.getTask(taskId);
     }
 
-    @DeleteMapping(value = "/{taskID}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteTask(@PathVariable ("taskID") String taskId){
+    @DeleteMapping(value = "/{taskID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteTask(@PathVariable("taskID") String taskId) {
         try {
             logger.info("Task deleted");
             taskService.deleteTask(taskId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (TaskNotFoundException e){
+        } catch (TaskNotFoundException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PatchMapping(value = "/{taskID}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updateTask(@PathVariable ("taskID") String taskId,@RequestBody TaskDTO taskDTO){
+    @PatchMapping(value = "/{taskID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateTask(@PathVariable("taskID") String taskId, @RequestBody TaskDTO taskDTO) {
         try {
             logger.info("Task updated");
-            taskService.updateTask(taskId,taskDTO);
+            taskService.updateTask(taskId, taskDTO);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (TaskNotFoundException e){
+        } catch (TaskNotFoundException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }}
+    }
 }
