@@ -2,7 +2,6 @@ package lk.ijse.backend.service.impl;
 
 import jakarta.transaction.Transactional;
 import lk.ijse.backend.DataPersistException;
-import lk.ijse.backend.controller.TaskController;
 import lk.ijse.backend.dao.TaskDAO;
 import lk.ijse.backend.dto.TaskStatus;
 import lk.ijse.backend.dto.impl.TaskDTO;
@@ -64,6 +63,14 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void updateTask(String taskId, TaskDTO taskDTO) {
-
+        Optional<Task> task = taskDao.findById(taskId);
+        if(task.isPresent()){
+            task.get().setTitle(taskDTO.getTitle());
+            task.get().setDescription(taskDTO.getDescription());
+            task.get().setStatus(taskDTO.getStatus());
+        } else {
+            logger.info("Task not found");
+            throw new TaskNotFoundException("Task not found");
+        }
     }
 }
