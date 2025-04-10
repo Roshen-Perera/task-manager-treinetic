@@ -1,21 +1,32 @@
 package lk.ijse.backend.service.impl;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import lk.ijse.backend.service.JWTService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.security.Key;
 import java.util.Map;
 import java.util.function.Function;
 
 public class JWTServiceImpl implements JWTService {
+    @Value("${spring.jwtKey}")
+    private String jwtKey;
     @Override
     public String extractUserName(String token) {
-        return "";
+        return extractClaim(token,Claims::getSubject);
     }
 
     @Override
     public Claims extractAllClaims(String token) {
-        return null;
+    }
+
+    private Key getSigninKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(jwtKey);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     @Override
