@@ -4,6 +4,7 @@ package lk.ijse.backend.controller;
 import lk.ijse.backend.DataPersistException;
 import lk.ijse.backend.dto.TaskStatus;
 import lk.ijse.backend.dto.impl.TaskDTO;
+import lk.ijse.backend.exception.TaskNotFoundException;
 import lk.ijse.backend.service.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,5 +51,20 @@ public class TaskController {
     public TaskStatus getSelectedTask(@PathVariable ("taskID") String taskId){
         logger.info("Task fetched");
         return taskService.getTask(taskId);
+    }
+
+    @DeleteMapping(value = "/{taskID}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteTask(@PathVariable ("taskID") String taskId){
+        try {
+            logger.info("Task deleted");
+            taskService.deleteTask(taskId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (TaskNotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
