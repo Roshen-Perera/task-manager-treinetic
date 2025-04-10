@@ -29,6 +29,7 @@ public class TaskController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveTask(@RequestBody TaskDTO taskDTO) {
         try {
+            logger.info("Saving task with ID: " + taskDTO.getId());
             logger.info("Saving task");
             taskService.saveTask(taskDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -68,7 +69,7 @@ public class TaskController {
         }
     }
 
-    @PatchMapping(value = "/{taskID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{taskID}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateTask(@PathVariable("taskID") String taskId, @RequestBody TaskDTO taskDTO) {
         try {
             logger.info("Task updated");
