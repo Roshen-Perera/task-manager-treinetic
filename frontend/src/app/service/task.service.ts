@@ -30,11 +30,12 @@ export class TaskService {
     return this.http.get<Task[]>(this.serviceURL, { headers });
   }
 
-  deleteTask(task: Task): Observable<Task> {
+  deleteTask(id: string): Observable<Task> {
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NoZW4iLCJpYXQiOjE3NDQyOTYzOTYsImV4cCI6MTc0NDM4Mjc5Nn0.00q3wmyZiORg1y_RPC-q2hJo1ODOKANJIHtMXWF7TQI';
     const headers = new HttpHeaders({
-      'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NoZW4iLCJpYXQiOjE3NDQyOTYzOTYsImV4cCI6MTc0NDM4Mjc5Nn0.00q3wmyZiORg1y_RPC-q2hJo1ODOKANJIHtMXWF7TQI',  // Example of adding an authorization token
+      'Authorization': `Bearer ${token}`,
     });
-    return this.http.get<Task>(this.serviceURL+'/'+task.id, { headers });
+    return this.http.delete<Task>(this.serviceURL+'/'+id, { headers });
   }
 
   updateTask(task: Task): Observable<Task> {

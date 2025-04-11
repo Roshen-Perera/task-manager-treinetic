@@ -4,10 +4,10 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',
-  imports: [DashboardComponent, RouterOutlet],
+  imports: [ RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'task-manager';
 }

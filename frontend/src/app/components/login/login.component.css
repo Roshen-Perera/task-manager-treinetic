@@ -1,0 +1,41 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.bag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.register-text {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.register-text a {
+  text-decoration: none;
+  color: #2575fc;
+  font-weight: 500;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}

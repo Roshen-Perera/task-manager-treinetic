@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../../service/task.service';
 import {Task} from '../../model/task';
 import {FormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +11,7 @@ import {CommonModule} from '@angular/common';
     FormsModule,
     CommonModule
   ],
+  providers: [DatePipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -25,6 +26,7 @@ export class DashboardComponent implements OnInit{
   taskDescription = '';
 
   ngOnInit(): void {
+    this.currentDate = this.date.transform(new Date(), 'yyyy-MM-dd');
     this.taskObject = new Task();
     this.taskList = [];
     this.loadAllTask();
@@ -40,6 +42,8 @@ export class DashboardComponent implements OnInit{
 
   addTask() {
     this.taskObject.title = this.taskTitle;
+    this.taskObject.status = this.currentStatus;
+    this.taskObject.createdAt =
     this.taskObject.description = this.taskDescription;
     this.taskService.addTask(this.taskObject).subscribe(res => {
       this.ngOnInit()
@@ -57,15 +61,16 @@ export class DashboardComponent implements OnInit{
     });
   }
 
-  deleteTask(task: Task) {
-    this.taskService.deleteTask(task).subscribe(res => {
+  deleteTask(id: string) {
+    this.taskService.deleteTask(id).subscribe(res => {
+      console.log("id"+id);
       this.ngOnInit()
     }, err => {
       alert("Failed to delete task");
     });
   }
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, private date: DatePipe) {
 
   }
 
