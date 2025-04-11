@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit{
     this.taskService.addTask(this.taskObject).subscribe(res => {
       this.ngOnInit()
       this.taskTitle = '';
+      alert("Task added successfully");
     }, err => {
       alert(err.error.message);
     });
@@ -73,6 +74,7 @@ export class DashboardComponent implements OnInit{
     this.taskService.deleteTask(id).subscribe(res => {
       console.log("id"+id);
       this.ngOnInit()
+      alert("Task deleted successfully");
     }, err => {
       alert("Failed to delete task");
     });
