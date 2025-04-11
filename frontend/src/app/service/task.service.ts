@@ -15,23 +15,25 @@ export class TaskService {
     this.serviceURL = "http://localhost:8080/trienetic/api/task"
   }
 
+
+
   addTask(task: Task): Observable<Task> {
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NoZW4iLCJpYXQiOjE3NDQyOTYzOTYsImV4cCI6MTc0NDM4Mjc5Nn0.00q3wmyZiORg1y_RPC-q2hJo1ODOKANJIHtMXWF7TQI';
+    const token = localStorage.getItem('token')
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
     });
     return this.http.post<Task>(this.serviceURL, task, { headers });
   }
   getTask(): Observable<Task[]> {
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NoZW4iLCJpYXQiOjE3NDQyOTYzOTYsImV4cCI6MTc0NDM4Mjc5Nn0.00q3wmyZiORg1y_RPC-q2hJo1ODOKANJIHtMXWF7TQI';
+    const token = localStorage.getItem('token')
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
     });
     return this.http.get<Task[]>(this.serviceURL, { headers });
   }
 
-  deleteTask(id: string): Observable<Task> {
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NoZW4iLCJpYXQiOjE3NDQyOTYzOTYsImV4cCI6MTc0NDM4Mjc5Nn0.00q3wmyZiORg1y_RPC-q2hJo1ODOKANJIHtMXWF7TQI';
+  deleteTask(id: number): Observable<Task> {
+    const token = localStorage.getItem('token')
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
     });
@@ -39,8 +41,9 @@ export class TaskService {
   }
 
   updateTask(task: Task): Observable<Task> {
+    const token = localStorage.getItem('token')
     const headers = new HttpHeaders({
-      'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb3NoZW4iLCJpYXQiOjE3NDQyOTYzOTYsImV4cCI6MTc0NDM4Mjc5Nn0.00q3wmyZiORg1y_RPC-q2hJo1ODOKANJIHtMXWF7TQI',  // Example of adding an authorization token
+      'Authorization': `Bearer ${token}`,
     });
     return this.http.put<Task>(this.serviceURL+'/'+task.id, task, { headers });
   }

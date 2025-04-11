@@ -15,5 +15,5 @@ public class TaskDTO implements TaskStatus {
     private String title;
     private String description;
     private String status;
-    private LocalDateTime createdAt;
+    private String createdAt;
 }

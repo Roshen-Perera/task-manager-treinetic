@@ -15,10 +15,9 @@ import java.time.LocalDateTime;
 @Table(name = "Task")
 public class Task implements SuperEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private String title;
     private String description;
     private String status;
-    private LocalDateTime createdAt;
+    private String createdAt;
 }

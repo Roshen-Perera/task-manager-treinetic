@@ -17,10 +17,13 @@ import {CommonModule, DatePipe} from '@angular/common';
 })
 export class DashboardComponent implements OnInit{
 
+
   taskObject : Task = new Task();
   taskList : Task[] = [];
   currentDate: string | null = '';
   currentStatus: string  = 'PENDING';
+
+  time: number = new Date().getTime();
 
   taskTitle = '';
   taskDescription = '';
@@ -41,10 +44,14 @@ export class DashboardComponent implements OnInit{
   }
 
   addTask() {
+    this.taskObject.id = this.time;
     this.taskObject.title = this.taskTitle;
     this.taskObject.status = this.currentStatus;
-    this.taskObject.createdAt =
+    this.taskObject.createdAt = this.currentDate;
     this.taskObject.description = this.taskDescription;
+
+    console.log(this.taskObject);
+
     this.taskService.addTask(this.taskObject).subscribe(res => {
       this.ngOnInit()
       this.taskTitle = '';
@@ -61,7 +68,7 @@ export class DashboardComponent implements OnInit{
     });
   }
 
-  deleteTask(id: string) {
+  deleteTask(id: number) {
     this.taskService.deleteTask(id).subscribe(res => {
       console.log("id"+id);
       this.ngOnInit()
@@ -73,5 +80,4 @@ export class DashboardComponent implements OnInit{
   constructor(private taskService: TaskService, private date: DatePipe) {
 
   }
-
 }

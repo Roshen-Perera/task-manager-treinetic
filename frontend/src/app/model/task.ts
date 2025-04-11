@@ -1,7 +1,7 @@
 export class Task {
-  id: string = '';
+  id: any = '';
   title: string = '';
   description: string = '';
   status: string = '';
-  createdAt: string = '';
+  createdAt: string | null = '';
 }
