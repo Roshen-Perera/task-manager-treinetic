@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {UserService} from '../../service/user.service';
 import {User} from '../../model/user';
 import {FormsModule} from '@angular/forms';
+import {routes} from '../../app.routes';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   username = '';
   password = '';
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   userObject : User = new User();
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
       res => {
         console.log(res);
         localStorage.setItem('token', res.token);
+        this.router.navigate(['dashboard']);
       },
       err => {
         console.error(err);
@@ -43,4 +45,6 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  
 }
