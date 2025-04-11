@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
+import {User} from '../../model/user';
 
 @Component({
   selector: 'app-register',
@@ -11,9 +12,17 @@ import {RouterLink} from '@angular/router';
 })
 export class RegisterComponent implements OnInit{
 
-  taskObject : Task = new Task();
-    ngOnInit(): void {
+    username = '';
+    password = '';
 
+    userObject : User = new User();
+    ngOnInit(): void {
+      this.userObject = new User();
+    }
+
+    registerUser() {
+      this.userObject.username = this.username;
+      this.userObject.password = this.password;
     }
 
 }
