@@ -3,6 +3,7 @@ import {TaskService} from '../../service/task.service';
 import {Task} from '../../model/task';
 import {FormsModule} from '@angular/forms';
 import {CommonModule, DatePipe} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -77,7 +78,12 @@ export class DashboardComponent implements OnInit{
     });
   }
 
-  constructor(private taskService: TaskService, private date: DatePipe) {
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['']);
+  }
+
+  constructor(private taskService: TaskService, private date: DatePipe, private router: Router) {
 
   }
 }

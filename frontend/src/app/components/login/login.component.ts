@@ -3,7 +3,6 @@ import {Router, RouterLink} from '@angular/router';
 import {UserService} from '../../service/user.service';
 import {User} from '../../model/user';
 import {FormsModule} from '@angular/forms';
-import {routes} from '../../app.routes';
 
 @Component({
   selector: 'app-login',
@@ -46,5 +45,5 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  
+
 }
