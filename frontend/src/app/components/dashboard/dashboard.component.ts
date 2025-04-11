@@ -83,6 +83,13 @@ export class DashboardComponent implements OnInit{
     this.router.navigate(['']);
   }
 
+  changeStatus(task: Task, event: Event) {
+    const target = event.target as HTMLInputElement;
+    task.status = target.checked ? 'COMPLETED' : 'PENDING';
+    console.log('Updated Task:', task);
+  }
+
+
   constructor(private taskService: TaskService, private date: DatePipe, private router: Router) {
 
   }
